@@ -2,7 +2,7 @@
 
 SteemPay is a mobile "Steem Backed Dollar" wallet app that steemians can use to spend SBD. This is the self-proclaimed "easiest wallet in crypto".
 
-![alt text](https://github.com//kodaxx/steempay/raw/master/dashboard.png "SteemPay Dashboard")
+![alt text](https://github.com/kodaxx/steempay/blob/master/dashboard.jpg "SteemPay Dashboard")
 
 # What this does
 
