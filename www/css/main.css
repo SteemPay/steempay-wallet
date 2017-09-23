@@ -1,0 +1,160 @@
+/* HEADER NAVIGATION */
+#sign_out {
+    color: #FFFFFF;
+    font-size: 5vw;
+    position: absolute;
+    right: 4.5vw;
+    top: 4vw;
+}
+
+#back {
+    color: #FFFFFF;
+    font-size: 5vw;
+    position: absolute;
+    left: 4.5vw;
+    top: 4vw;
+}
+
+#back_text {
+    padding-left: 2vw;
+}
+
+
+/* PROFILE HERO */
+
+#send_button i {
+    padding-left: 3vw;
+}
+
+#send_button {
+    background: #475666;
+    color: #F6F7F9;
+    border-radius: 50%;
+    height: 0;
+    width: 13%;
+    padding-bottom: 13%;
+    position: absolute;
+    right: 7vw;
+    top: 41.5vw;
+    font-size: 6vw;
+    line-height: 14vw;
+    box-shadow: 1px 1px 3px #888888;
+    transition-duration: 0.05s;
+}
+
+#send_button:active {
+    background: #5e666f;
+    position: absolute;
+    right: 6.6vw;
+    top: 41.9vw;
+    box-shadow: none;
+}
+
+#hero {
+    background: #4BA2F2;
+    height: 35vw;
+    text-align: center;
+}
+
+#balance {
+    font-size: 15vw;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 30vw;
+    margin-bottom: 0;
+}
+
+#profile {
+    height: auto;
+    width: 20%;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #FFFFFF;
+    position: absolute;
+    left: 7vw;
+    top: 40vw;
+}
+
+#balance_bottom {
+    background: #FFFFFF;
+    height: 17vw;
+    margin-top: 0;
+    padding-top: 2vw;
+    box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.16);
+}
+
+#info {
+    margin-left: 31vw;
+}
+
+#user {
+    font-weight: 700;
+    font-size: 6vw;
+    color: #1A5099;
+}
+
+
+/* LIST */
+
+#activity {
+    margin: 3vw;
+}
+
+#none {
+    text-align: center;
+    font-size: 6vw;
+}
+
+.tx_wrap {
+    background: #FFFFFF;
+    border-bottom: .5px solid #DDE2E7;
+    height: 17vw;
+}
+
+.tx_icon {
+    font-size: 12vw;
+    line-height: 17vw;
+    padding-left: 3vw;
+}
+
+.received {
+    color: #65D2BD;
+}
+
+.sent {
+    color: #d26565;
+}
+
+.tx_users {
+    position: relative;
+    left: 3vw;
+    bottom: 2.7vw;
+    color: #9EACBA;
+    font-size: 4vw;
+    font-weight: 600;
+}
+
+.tx_amount {
+    bottom: 2.7vw;
+    float: right;
+    padding-right: 3vw;
+    font-size: 4vw;
+}
+
+.tx_memo {
+    position: relative;
+    left: 2vw;
+}
+
+
+/* TRANSFER */
+
+#transfer_page {
+    display: none;
+}
+
+#transfer_error {
+    color: #d26565;
+    display: none;
+}

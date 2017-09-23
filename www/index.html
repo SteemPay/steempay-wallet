@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SteemPay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+    <script src="https://use.fontawesome.com/054e957232.js"></script>
+    <script src="lib/jquery-3.2.1.min.js"></script>
+<!--    <script src="//cdn.steemjs.com/lib/latest/steem.min.js"></script>-->
+    <script src="lib/steem.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/transfer.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body>
+    <script type="text/javascript" src="cordova.js"></script>
+    <div class="loader"></div>
+    <div id="header"><i style="display: none" class="fa fa-chevron-left" id="back" aria-hidden="true"><span id="back_text">back</span></i><span id="header-title">steempay</span><i class="fa fa-sign-out" id="sign_out" aria-hidden="true"></i></div>
+    
+    <div id="main">
+        <div id="hero">
+            <span id="balance">$0.00</span>
+        </div>
+        <img id="profile">
+        <div id="balance_bottom">
+        <div id="info">
+            <span id="user"></span>
+            <br>
+            <span id="location" class="subtext"></span>
+        </div>
+        </div>
+        <div id="send_button">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </div>
+    </div>
+    
+    <div id="transfer_page">
+        <span class="subtext subtext_margin">transfer<span id="transfer_error"> - error</span></span>
+        <div class="form_wrap">
+            <label>to:</label>
+            <input type="text" id="transfer_to" placeholder="e.g. kodaxx">
+        </div>
+        <div class="form_wrap">
+            <label>amount:</label>
+            <input type="number" id="transfer_amount" placeholder="e.g. 20.00">
+        </div>
+        <div class="form_wrap">
+            <label>memo:</label>
+            <input type="text" id="transfer_memo" placeholder="public memo (optional)">
+        </div>
+        <div class="primary_button" id="transfer_send">send</div>
+    </div>
+
+    <div id="history_page">
+        <span class="subtext" id="activity">history</span>
+        <p class="subtext" id="none">no recent activity :(</p> 
+        <div id="list">
+            <div id="tx_template" class="tx_wrap" style="display: none">
+                <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from</span><span class="tx_amount received">$</span></span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

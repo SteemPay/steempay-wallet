@@ -1,0 +1,97 @@
+@font-face {
+  font-family: Netto;
+  src: url('./fonts/netto_ot.ttf');
+}
+* {
+    font-family: Netto, 'PT Sans', sans-serif;
+    outline:none;
+}
+body {
+    background: #F6F7F9;
+    margin: 0;
+}
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+    background-size: 20vw;
+}
+
+/* HEADER */
+
+#header {
+    background: #4BA2F2;
+    height: 13vw;
+    text-align: center;
+}
+
+#header-title {
+    color: #FFFFFF;
+    font-size: 5vw;
+    line-height: 13vw;
+    vertical-align: middle;
+}
+
+.subtext {
+    color: #9EACBA;
+    font-size: 3vw;
+    font-weight: 700;
+    display: block;
+}
+
+/* TRANSFER */
+
+.subtext_margin {
+    margin-top: 3vw;
+    margin-left: 3vw;
+}
+
+.form_wrap {
+    padding-top: 5vw;
+    background: #F6F7F9;
+    border-bottom: .5px solid #DDE2E7;
+    height: 10vw;
+}
+
+label {
+    color: #5e666f;
+    font-size: 4.5vw;
+    font-weight: 600;
+    padding-left: 6vw;
+}
+
+::-webkit-input-placeholder
+{
+    color: #9EACBA;
+}
+
+input {
+    font-size: 4.5vw;
+    border: none;
+    padding-top: 3vw;
+    background: #F6F7F9;
+    line-height: 6vw;
+    color: #5e666f;
+    margin-left: 1vw;
+    width: 72%;
+}
+
+.primary_button {
+    display: block;
+    background: #4BA2F2;
+    border: none;
+    border-radius: 10vw;
+    color: #FFFFFF;
+    width: 70%;
+    margin: auto;
+    margin-top: 20vw;
+    padding: 4vw;
+    text-align: center;
+    text-decoration: none;
+    font-size: 7vw;
+}

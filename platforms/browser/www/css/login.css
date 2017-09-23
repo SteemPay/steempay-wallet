@@ -1,0 +1,19 @@
+#logo {
+    display: block;
+    margin: 0 auto;
+    padding: 20vw 0 15vw 0;
+}
+
+#login {
+    margin-top: 3vw;
+    margin-left: 3vw;
+}
+
+#login_error {
+    color: #d26565;
+    display: none;
+}
+
+#login_button {
+    margin-top: 35vw;
+}
