@@ -8,7 +8,6 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
     <script src="https://use.fontawesome.com/054e957232.js"></script>
     <script src="lib/jquery-3.2.1.min.js"></script>
-<!--    <script src="//cdn.steemjs.com/lib/latest/steem.min.js"></script>-->
     <script src="lib/steem.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/history.js"></script>
@@ -20,14 +19,16 @@
 
 <body>
     <script type="text/javascript" src="cordova.js"></script>
+    <!-- loader div -->
     <div class="loader"></div>
+    <!-- nav bar -->
     <div id="header"><i style="display: none" class="fa fa-chevron-left" id="back" aria-hidden="true"><span id="back_text">back</span></i><span id="header-title">steempay</span><i class="fa fa-sign-out" id="sign_out" aria-hidden="true"></i></div>
-    
+    <!-- account info -->
     <div id="main">
         <div id="hero">
             <span id="balance">$0.00</span>
         </div>
-        <img id="profile">
+        <img id="profile" src="img/default-user.png">
         <div id="balance_bottom">
         <div id="info">
             <span id="user"></span>
@@ -39,7 +40,7 @@
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </div>
     </div>
-    
+    <!-- transfer page -->
     <div id="transfer_page">
         <span class="subtext subtext_margin">transfer<span id="transfer_error"> - error</span></span>
         <div class="form_wrap">
@@ -56,11 +57,12 @@
         </div>
         <div class="primary_button" id="transfer_send">send</div>
     </div>
-
+    <!-- transfer history -->
     <div id="history_page">
         <span class="subtext" id="activity">history</span>
         <p class="subtext" id="none">no recent activity :(</p> 
         <div id="list">
+            <!-- template for history -->
             <div id="tx_template" class="tx_wrap" style="display: none">
                 <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from</span><span class="tx_amount received">$</span></span>
             </div>

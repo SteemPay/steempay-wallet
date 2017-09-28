@@ -21,8 +21,9 @@ Will be distributed through app store - but there is an alpha release apk file f
 * Limit tx history to 25 (or so)
 * Change icons/logos
 * Test on more deivces
-* Fix CSS for profile pic if it is not square (also have default profile pic if user has none)
-* Add check to login screen if logged_in
+* ~~Fix CSS for profile pic if it is not square~~
+* ~~Default profile pic if user has none~~
+* ~~Add check to login screen if logged_in~~
 * Native tx notifications
 * Add memo and date to tx history
 * Use an encrypted local storage instead of browser localstorage

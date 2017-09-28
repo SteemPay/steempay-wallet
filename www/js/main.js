@@ -1,6 +1,5 @@
 //global balance variable
 var balance;
-
 $(document).ready(function () {
     //function for single-page transition
     function pageTransition(distance) {
@@ -29,15 +28,17 @@ $(document).ready(function () {
 });
 $(".loader").fadeIn("fast");
 //check if user is logged in
-if (localStorage.getItem('logged_in') != "1") {
+if (localStorage.getItem('logged_in') !== "1") {
     window.location.href = "login.html";
-};
+}
 //disable back button when logged in to wallet - don't want to go back to login page
 document.addEventListener("deviceready", onDeviceReady, false);
+
 function onDeviceReady() {
     document.addEventListener("backbutton", function (e) {
         e.preventDefault();
-    }, false );}
+    }, false);
+}
 //function to drop last decimal of SBD balance without rounding
 function toFixed(variable, d) {
     var v = parseFloat(variable);
@@ -48,9 +49,9 @@ var user = localStorage.getItem("user");
 //get account object
 steem.api.getAccounts([user], function (err, response) {
     //parse metadata and fill in profile details
-    var metadata = jQuery.parseJSON(response[0].json_metadata);
-    var pic = metadata.profile.profile_image;
-    var location = metadata.profile.location;
+    var metadata = jQuery.parseJSON(response[0].json_metadata),
+        pic = metadata.profile.profile_image,
+        location = metadata.profile.location;
     balance = response[0].sbd_balance;
     $("#user").text(user);
     $("#location").text(location);

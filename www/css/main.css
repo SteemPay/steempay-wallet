@@ -65,8 +65,8 @@
 }
 
 #profile {
-    height: auto;
-    width: 20%;
+    height: 20vw; /* auto */
+    width: 20vw; /* 20% */
     border-radius: 10px;
     border-style: solid;
     border-width: 3px;
