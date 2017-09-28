@@ -1,5 +1,7 @@
 //todo: clean up (this is a mess)
 //todo: want to add dynamic balance as user types in amount
+//encrypting localstorage
+var ls = new SecureLS({encodingType: 'aes'});
 $(document).ready(function () {
     //page transition (at the risk of repeating, oops)
     function pageTransition(distance) {
@@ -20,7 +22,7 @@ $(document).ready(function () {
         var to = $("#transfer_to").val().toLowerCase();
         var amount = toFixed($("#transfer_amount").val(), 3);
         var memo = $("#transfer_memo").val();
-        var wif = localStorage.getItem("key");
+        var wif = ls.get("key");
         var from = localStorage.getItem("user");
         //api call to check if valid
         var isValid = steem.utils.validateAccountName(to);

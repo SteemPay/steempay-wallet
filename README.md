@@ -26,8 +26,15 @@ Will be distributed through app store - but there is an alpha release apk file f
 * ~~Add check to login screen if logged_in~~
 * Native tx notifications
 * Add memo and date to tx history
-* Use an encrypted local storage instead of browser localstorage
+* ~~Use an encrypted local storage instead of browser localstorage~~
 * Custom wallet API
+
+# How to build (in 5 minutes)
+
+* Zip the source (or use the zip in ./dist)
+* Go to https://build.phonegap.com and upload zip
+* Follow instructions (it will build in less than 1 minute)
+* Download to phone and install
 
 # License
 

@@ -1,4 +1,5 @@
-var user = localStorage["user"];
+//get user
+var user = localStorage.getItem("user");
 
 function createHistory(status, id, user, amount) {
     var newTX = $("#tx_template").clone();

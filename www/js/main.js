@@ -1,5 +1,8 @@
 //global balance variable
 var balance;
+//encrypting localstorage
+var ls = new SecureLS({encodingType: 'aes'});
+
 $(document).ready(function () {
     //function for single-page transition
     function pageTransition(distance) {
@@ -19,10 +22,11 @@ $(document).ready(function () {
         pageTransition(7);
     });
     $("#transfer_send").click(function () {
-        console.log("clicked");
+        console.log("sending..");
     });
     $("#sign_out").click(function () {
         localStorage.clear();
+        ls.clear();
         window.location.href = "login.html";
     });
 });

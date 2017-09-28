@@ -2,6 +2,9 @@
 if (localStorage.getItem('logged_in') === "1") {
     window.location.href = "index.html";
 }
+//encrypting localstorage
+var ls = new SecureLS({encodingType: 'aes'});
+
 $(document).ready(function () {
     $(".loader").fadeOut("fast");
     $("#login_button").click(function () {
@@ -33,10 +36,15 @@ $(document).ready(function () {
                             //keys match - correct username/password combo
                             console.log("correct username/password");
                             //save active priv key and username into local storage
-                            localStorage.setItem("key", activePriv);
-                            localStorage.setItem("memo", memo);
+                            ls.set("key", activePriv); // set key1
+                            ls.set("memo", memo);
                             localStorage.setItem("user", account);
                             localStorage.setItem("logged_in", "1");
+                            
+//                            localStorage.setItem("key", activePriv);
+//                            localStorage.setItem("user", account);
+//                            localStorage.setItem("logged_in", "1");
+                            
                             //send user to wallet
                             window.location.href = "index.html";
                             $(".loader").fadeOut("slow");
