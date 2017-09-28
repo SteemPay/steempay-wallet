@@ -26,7 +26,7 @@ $(document).ready(function () {
                     steem.api.getAccounts([account], function (err, response) {
                         //get active pubkey to check against key that is generated below
                         var activePubVerify = response[0].active.key_auths[0][0],
-                        //generate active keys from account username/password
+                            //generate active keys from account username/password
                             keys = steem.auth.getPrivateKeys(account, password, ["active", "memo"]),
                             activePub = keys.activePubkey,
                             activePriv = keys.active,
@@ -40,11 +40,6 @@ $(document).ready(function () {
                             ls.set("memo", memo);
                             localStorage.setItem("user", account);
                             localStorage.setItem("logged_in", "1");
-                            
-//                            localStorage.setItem("key", activePriv);
-//                            localStorage.setItem("user", account);
-//                            localStorage.setItem("logged_in", "1");
-                            
                             //send user to wallet
                             window.location.href = "index.html";
                             $(".loader").fadeOut("slow");

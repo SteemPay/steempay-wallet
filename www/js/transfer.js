@@ -19,13 +19,13 @@ $(document).ready(function () {
         //fade in loader screen
         $(".loader").fadeIn("fast");
         //get info from transfer form and local storage
-        var to = $("#transfer_to").val().toLowerCase();
-        var amount = toFixed($("#transfer_amount").val(), 3);
-        var memo = $("#transfer_memo").val();
-        var wif = ls.get("key");
-        var from = localStorage.getItem("user");
-        //api call to check if valid
-        var isValid = steem.utils.validateAccountName(to);
+        var to = $("#transfer_to").val().toLowerCase(),
+            amount = toFixed($("#transfer_amount").val(), 3),
+            memo = $("#transfer_memo").val(),
+            wif = ls.get("key"),
+            from = localStorage.getItem("user"),
+            //api call to check if valid
+            isValid = steem.utils.validateAccountName(to);
         
         //check if name is valid format, else show error
         if (isValid == null) {
