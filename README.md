@@ -19,7 +19,7 @@ Will be distributed through app store - but there is an alpha release apk file f
 
 * Code clean-up/refactoring
 * Limit tx history to 25 (or so)
-* Change icons/logos
+* ~~Change icons/logos~~
 * Test on more deivces
 * ~~Fix CSS for profile pic if it is not square~~
 * ~~Default profile pic if user has none~~
