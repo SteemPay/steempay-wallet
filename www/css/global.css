@@ -20,6 +20,13 @@ body {
     z-index: 9999;
     background: url('pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
     background-size: 20vw;
+    text-align: center;
+}
+
+.status {
+    position: relative;
+    top: 58vh;
+    color: #9EACBA;
 }
 
 /* HEADER */

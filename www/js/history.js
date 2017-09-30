@@ -29,10 +29,12 @@ steem.api.streamOperations(function (err, result) {
 });
 
 $(document).ready(function () {
+    $("#main_status").text("getting history...");
     $.ajax({
         url: "https://api.steemjs.com/get_account_history?account=" + user + "&from=-1&limit=10000",
         success: function (result) {
 //            var sliced = result.slice(0, 26);
+            $("#main_status").text("creating history...");
             result.reverse().forEach(function (element) {
                 if (element[1].op[0] == "transfer") {
                     if (element[1].op[1].to == user) {
