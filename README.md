@@ -17,10 +17,10 @@ Will be distributed through app store - but there is an alpha release apk file f
 
 # TO-DO
 
-* Code clean-up/refactoring
+* ~~Code clean-up/refactoring~~
 * Limit tx history to 25 (or so)
 * ~~Change icons/logos~~
-* Test on more deivces
+* ~~Test on different deivces~~
 * ~~Fix CSS for profile pic if it is not square~~
 * ~~Default profile pic if user has none~~
 * ~~Add check to login screen if logged_in~~

@@ -1,11 +1,13 @@
 @font-face {
-  font-family: Netto;
-  src: url('./fonts/netto_ot.ttf');
+    font-family: Netto;
+    src: url('./fonts/netto_ot.ttf');
 }
+
 * {
     font-family: Netto, 'PT Sans', sans-serif;
-    outline:none;
+    outline: none;
 }
+
 body {
     background: #F6F7F9;
     margin: 0;
@@ -18,7 +20,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url('pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+    background: url('pageLoader.gif') 50% 50% no-repeat rgb(249, 249, 249);
     background-size: 20vw;
     text-align: center;
 }
@@ -72,8 +74,7 @@ label {
     padding-left: 6vw;
 }
 
-::-webkit-input-placeholder
-{
+::-webkit-input-placeholder {
     color: #9EACBA;
 }
 

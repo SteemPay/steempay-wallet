@@ -1,9 +1,13 @@
+/*jslint browser: true*/
+/*global SecureLS, $, steem, localStorage, window, document*/
 //check if user is logged in
 if (localStorage.getItem('logged_in') === "1") {
     window.location.href = "index.html";
 }
 //encrypting localstorage
-var ls = new SecureLS({encodingType: 'aes'});
+var ls = new SecureLS({
+    encodingType: 'aes'
+});
 
 $(document).ready(function () {
     $(".loader").fadeOut("fast");
@@ -25,7 +29,6 @@ $(document).ready(function () {
             $("#login_status").text("looking up user...");
             steem.api.lookupAccountNames([account], function (err, result) {
                 if (err) {
-                    console.log("There was an error: " + err);
                     $("#login_error").text(" - " + err);
                     $("#login_error").show();
                     $(".loader").fadeOut("slow");
@@ -42,12 +45,11 @@ $(document).ready(function () {
                             activePub = keys.activePubkey,
                             activePriv = keys.active,
                             memo = keys.memo;
-                            $("#login_status").text("generating keys...");
+                        $("#login_status").text("generating keys...");
                         //check if generated key is the same as known key for account
                         if (activePub === activePubVerify) {
                             $("#login_status").text("validating keys...");
                             //keys match - correct username/password combo
-                            console.log("correct username/password");
                             //save active priv key and username into local storage
                             $("#login_status").text("encrypting keys...");
                             ls.set("key", activePriv); // set key1
@@ -59,7 +61,6 @@ $(document).ready(function () {
                             $(".loader").fadeOut("slow");
                         } else {
                             //keys do not match - incorrect username/password combo
-                            console.log("password does not match account");
                             $("#login_error").text(" - password does not match this user");
                             $("#login_error").show();
                             $(".loader").fadeOut("slow");
@@ -67,7 +68,6 @@ $(document).ready(function () {
                     });
                 } else {
                     //user does not exist
-                    console.log("user doesn't exist");
                     $("#login_error").text(" - user does not exist");
                     $("#login_error").show();
                     $(".loader").fadeOut("slow");
@@ -75,7 +75,6 @@ $(document).ready(function () {
             });
         } else {
             //name is invalid format
-            console.log("isValid: " + isValid);
             $("#login_error").text(" - " + isValid.toLowerCase());
             $("#login_error").show();
             $(".loader").fadeOut("slow");
