@@ -41,7 +41,7 @@ $(document).ready(function () {
             steem.api.lookupAccountNames([to], function (err, result) {
                 if (result[0] !== null) {
                     //check that balance is enough
-                    if ((parseInt(amount, 10) <= parseInt(balance, 10)) && (parseInt(amount, 10) >= 0.001)) {
+                    if ((parseFloat(amount, 10) <= parseFloat(balance, 10)) && (parseFloat(amount, 10) >= 0.001)) {
                         //initiate transfer
                         steem.broadcast.transfer(wif, from, to, amount + " SBD", memo, function (err, result) {
                             console.log(err, result);
