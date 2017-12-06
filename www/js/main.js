@@ -10,6 +10,11 @@ var ls = new SecureLS({
 $(document).ready(function () {
     //navigation
     $("#send_button").click(function () {
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
+        pageTransition(-20);
+    });
+    $("#header_send").click(function () {
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
         pageTransition(-20);
     });
     $("#back").click(function () {

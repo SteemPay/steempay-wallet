@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.kodaxx.steempay" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>steempay</name>
+    <name>SteemPay</name>
     <description>
-        steempay is the world's easiest digital currency wallet.
+        SteemPay is the world's easiest digital currency wallet.
         
-        With the steempay wallet, your passwords and money remain in your control at all times. Your keys never leave the device and the code is 100% open source.
+        With the SteemPay wallet, your passwords and money remain in your control at all times. Your keys never leave the device and the code is 100% open source.
         Steem Backed Dollars is a stable digital currency, meaning that the price does not change is it does with Bitcoin, Ethereum, etc.
         
         This wallet deals only with your Steem Backed Dollars balance and sending is as simple as tagging someone on social media!

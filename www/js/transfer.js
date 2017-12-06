@@ -22,12 +22,10 @@ $(document).ready(function () {
             from = localStorage.getItem("user"),
             //api call to check if valid
             isValid = steem.utils.validateAccountName(to);
-
         //check if name is valid format, else show error
         if (isValid === null) {
             //hide error if showing
             $("#transfer_error").hide();
-
             //check if user exists, else show error
             steem.api.lookupAccountNames([to], function (err, result) {
                 if (result[0] !== null) {

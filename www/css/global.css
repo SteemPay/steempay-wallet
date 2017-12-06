@@ -36,7 +36,8 @@ body {
 #header {
     background: #4BA2F2;
     height: 13vw;
-    text-align: center;
+    /*text-align: center;*/
+
 }
 
 #header-title {
@@ -44,6 +45,8 @@ body {
     font-size: 5vw;
     line-height: 13vw;
     vertical-align: middle;
+    margin-left: 42vw;
+    transition: margin-left 1s;
 }
 
 .subtext {
