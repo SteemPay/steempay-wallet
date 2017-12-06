@@ -15,5 +15,14 @@
 }
 
 #login_button {
-    margin-top: 35vw;
+    margin-top: 25vw;
+}
+
+#create_link {
+    margin-top: 5vw;
+    text-align: center;
+}
+
+#create_link a {
+    color: #4BA2F2;
 }

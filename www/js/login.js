@@ -29,9 +29,8 @@ $(document).ready(function () {
             $("#login_status").text("looking up user...");
             steem.api.lookupAccountNames([account], function (err, result) {
                 if (err) {
-                    $("#login_error").text(" - " + err);
-                    $("#login_error").show();
-                    $(".loader").fadeOut("slow");
+                    //log error to user
+                    error("login_error", err);
                 }
                 if (result[0] !== null) {
                     //if exists, get account user object
@@ -61,23 +60,17 @@ $(document).ready(function () {
                             $(".loader").fadeOut("slow");
                         } else {
                             //keys do not match - incorrect username/password combo
-                            $("#login_error").text(" - password does not match this user");
-                            $("#login_error").show();
-                            $(".loader").fadeOut("slow");
+                            error("login_error", "password does not match this user");
                         }
                     });
                 } else {
                     //user does not exist
-                    $("#login_error").text(" - user does not exist");
-                    $("#login_error").show();
-                    $(".loader").fadeOut("slow");
+                    error("login_error", "user does not exist");
                 }
             });
         } else {
             //name is invalid format
-            $("#login_error").text(" - " + isValid.toLowerCase());
-            $("#login_error").show();
-            $(".loader").fadeOut("slow");
+            error("login_error", isValid.toLocaleLowerCase());
         }
     });
 });

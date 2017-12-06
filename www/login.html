@@ -10,6 +10,7 @@
     <script src="lib/steem.min.js"></script>
     <script src="lib/secure-ls.min.js"></script>
     <!-- js -->
+    <script src="js/utils.js"></script>
     <script src="js/login.js"></script>
     <!-- styles -->
     <link rel="stylesheet" href="css/global.css">
@@ -25,7 +26,7 @@
     <img id="logo" src="img/logo.png">
     <!-- form -->
     <div>
-        <span class="subtext subtext_margin">login<span id="login_error"> - username/password combo is incorrect</span></span>
+        <span class="subtext subtext_margin">login<span id="login_error"></span></span>
         <div class="form_wrap">
             <label>username:</label>
             <input type="text" id="login_username">
@@ -35,6 +36,7 @@
             <input type="password" id="login_password">
         </div>
         <div class="primary_button" id="login_button">login</div>
+        <div id="create_link"><a target="_blank" href="https://steemit.com/pick_account">create an account</a></div>
     </div>
 </body>
 

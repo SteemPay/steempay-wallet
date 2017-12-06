@@ -20,7 +20,8 @@ $(document).ready(function () {
     }
     //transfer
     $("#transfer_send").click(function () {
-        $("#login_error").hide();
+        $("#transfer_error").hide();
+        $("#main_status").text("sending...");
         //fade in loader screen
         $(".loader").fadeIn("fast");
         //get info from transfer form and local storage
@@ -59,22 +60,16 @@ $(document).ready(function () {
                         });
                     } else {
                         //not enough balance or not sending the minimum amount
-                        $("#transfer_error").text(" - insufficient funds or not sending minimum (.001)");
-                        $("#transfer_error").show();
-                        $(".loader").fadeOut("slow");
+                        error("transfer_error", "insufficient funds or not sending minimum (.001)");
                     }
                 } else {
                     //user does not exist
-                    $("#transfer_error").text(" - user does not exist");
-                    $("#transfer_error").show();
-                    $(".loader").fadeOut("slow");
+                    error("transfer_error", "user does not exist");
                 }
             });
         } else {
             //name is invalid format
-            $("#transfer_error").text(" - " + isValid.toLowerCase());
-            $("#transfer_error").show();
-            $(".loader").fadeOut("slow");
+            error("transfer_error", isValid.toLowerCase());
         }
     });
 });

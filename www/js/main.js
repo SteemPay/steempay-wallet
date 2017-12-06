@@ -8,16 +8,6 @@ var ls = new SecureLS({
 });
 
 $(document).ready(function () {
-    //function for single-page transition
-    function pageTransition(distance) {
-        $("#send_button").animate({
-            right: distance + "vw"
-        });
-        $("#back").fadeToggle("fast");
-        $("#transfer_page").slideToggle("slow");
-        $("#history_page").fadeToggle("slow");
-        $("#send_button").toggle();
-    }
     //navigation
     $("#send_button").click(function () {
         pageTransition(-20);
@@ -38,12 +28,6 @@ $(".loader").fadeIn("fast");
 //check if user is logged in
 if (localStorage.getItem('logged_in') !== "1") {
     window.location.href = "login.html";
-}
-//function to drop last decimal of SBD balance without rounding
-function toFixed(variable, d) {
-    "use strict";
-    var v = parseFloat(variable);
-    return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
 }
 //get user name from local storage
 var user = localStorage.getItem("user");
