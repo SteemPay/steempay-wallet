@@ -8,16 +8,6 @@ var ls = new SecureLS({
     encodingType: 'aes'
 });
 $(document).ready(function () {
-    //page transition (at the risk of repeating, oops)
-    function pageTransition(distance) {
-        $("#send_button").animate({
-            right: distance + "vw"
-        });
-        $("#back").fadeToggle("fast");
-        $("#transfer_page").slideToggle("slow");
-        $("#history_page").fadeToggle("slow");
-        $("#send_button").toggle();
-    }
     //transfer
     $("#transfer_send").click(function () {
         $("#transfer_error").hide();
@@ -52,7 +42,8 @@ $(document).ready(function () {
                             $("#transfer_memo").val("");
                             //update balance (unnecessary call, need to just subtract amounts)
                             steem.api.getAccounts([user], function (err, response) {
-                                $("#balance").text("$" + toFixed(response[0].sdb_balance, 2));
+                                console.log(response);
+                                $("#balance").text("$" + toFixed(response[0].sbd_balance, 2));
                                 //fade out loader and transition back home
                                 $(".loader").fadeOut("slow");
                                 pageTransition(7);
