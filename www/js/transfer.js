@@ -44,6 +44,9 @@ $(document).ready(function () {
                                 $("#balance").text("$" + toFixed(response[0].sbd_balance, 2));
                                 //fade out loader and transition back home
                                 $(".loader").fadeOut("slow");
+                                //create new history item showing sent tx
+                                createHistory("sent", response.ref_block_num, to, amount);
+                                //transition back home
                                 pageTransition(7);
                             });
                         });
