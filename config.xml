@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kodaxx.steempay" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.kodaxx.steempay" version="1.1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>SteemPay</name>
     <description>
         SteemPay is the world's easiest digital currency wallet.
-        
+
         With the SteemPay wallet, your passwords and money remain in your control at all times. Your keys never leave the device and the code is 100% open source.
         Steem Backed Dollars is a stable digital currency, meaning that the price does not change is it does with Bitcoin, Ethereum, etc.
-        
+
         This wallet deals only with your Steem Backed Dollars balance and sending is as simple as tagging someone on social media!
     </description>
     <author email="kodaxx@gmail.com" href="https://kodaxx.github.io">
@@ -26,5 +26,5 @@
 		<icon src="www/res/icon/android/drawable-xxhdpi-icon.png" density="xxhdpi" />
 		<icon src="www/res/icon/android/drawable-xxxhdpi-icon.png" density="xxxhdpi" />
         <allow-intent href="market:*" />
-	</platform>    
+	</platform>
 </widget>

@@ -4,7 +4,7 @@
 //new api endpoint
 steem.api.setOptions({ url: 'https://api.steemit.com' });
 
-//error handling function
+// error handling function
 function error(id, text) {
     $("#" + id).text(" - " + text);
     $("#" + id).show();

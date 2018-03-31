@@ -1,7 +1,10 @@
 /*jslint browser: true*/
 /*global $*/
 
-//error handling function
+//new api endpoint
+steem.api.setOptions({ url: 'https://api.steemit.com' });
+
+// error handling function
 function error(id, text) {
     $("#" + id).text(" - " + text);
     $("#" + id).show();
@@ -29,23 +32,8 @@ function vw(value) {
       d = document,
       e = d.documentElement,
       g = d.getElementsByTagName('body')[0],
-      x = w.innerWidth || e.clientWidth || g.clientWidth,
-      y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+      x = w.innerWidth || e.clientWidth || g.clientWidth
 
     var result = (x*value)/100;
     return result;
 }
-//change header on scroll to show balance
-$(window).scroll(function() {
-    if ($(this).scrollTop() > vw(21)){
-        $("#header-title").hide();
-        $("#header_balance").text("$" + toFixed(parseFloat(balance), 2));
-        $("#sign_out").fadeOut(500);
-        $("#header_balance").fadeIn("slow");
-    } else {
-        $("#header_balance").hide();
-        $("#header-title").fadeIn("slow");
-        //$("#header-title").html("steempay");
-        $("#sign_out").fadeIn("slow");
-    }
-});

@@ -2,78 +2,98 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>SteemPay</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
-    <!-- libraries -->
-    <script src="https://use.fontawesome.com/054e957232.js"></script>
-    <script src="lib/jquery-3.2.1.min.js"></script>
-    <script src="lib/steem.min.js"></script>
-    <script src="lib/secure-ls.min.js"></script>
-    <!-- js -->
-    <script src="js/utils.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/history.js"></script>
-    <script src="js/transfer.js"></script>
-    <!-- styles -->
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/global.css">
+  <meta charset="utf-8">
+  <title>SteemPay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- libraries -->
+  <script src="https://use.fontawesome.com/054e957232.js"></script>
+  <script src="lib/jquery-3.2.1.min.js"></script>
+  <script src="lib/steem.min.js"></script>
+  <script src="lib/secure-ls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+  <!-- js -->
+  <script src="js/utils.js"></script>
+  <!-- styles -->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/global.css">
 </head>
 
 <body>
-    <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <div id="app">
     <!-- loader div -->
-    <div class="loader"><span id="main_status" class="status">loading...</span></div>
+    <div v-show="loading" class="loader"><span id="main_status" class="status">{{ status }}</span></div>
     <!-- nav bar -->
-    <header id="header"><i style="display: none" class="fa fa-chevron-left" id="back" aria-hidden="true"><span id="back_text">back</span></i><span id="header-title">steempay</span><span id="header_balance">balance</span><i class="fa fa-sign-out" id="sign_out" aria-hidden="true"></i></header>
+    <header id="header"><i style="display: none" class="fa fa-chevron-left" id="back" aria-hidden="true"><span id="back_text">back</span></i>
+      <span id="header-title">steempay</span>
+      <span id="header_balance"> • {{ currency === 'SBD' ? `$${sbd_balance} SBD` : `${steem_balance} STEEM` }}</span>
+      <i class="fa fa-sign-out" id="sign_out" aria-hidden="true"></i>
+      <i class="fa fa-paper-plane" id="header_send" aria-hidden="true"></i>
+    </header>
     <!-- account info -->
     <div id="main">
-        <div id="hero">
-            <span id="balance">$0.00</span>
-        </div>
-        <img id="profile" src="img/default-user.png">
-        <div id="balance_bottom">
+      <div id="hero">
+        <i @click="swapCurrency()" style="margin: 5vw; color: white;" class="fa fa-3x fa-caret-left"></i>
+        <span id="balance">{{ currency === 'SBD' ? `$${sbd_balance}` : steem_balance }}<span id="ticker"> {{ currency }}</span></span>
+        <i @click="swapCurrency()" style="margin: 5vw; color: white;" class="fa fa-3x fa-caret-right"></i>
+      </div>
+      <img id="profile" :src="avatar">
+      <div id="balance_bottom">
         <div id="info">
-            <span id="user"></span>
-            <br>
-            <span id="location" class="subtext">location not available</span>
+          <span id="user">{{ user }}</span>
+          <br>
+          <span v-show="location !== ''" id="location" class="subtext">{{ location }}</span>
         </div>
-        </div>
-        <div id="send_button">
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </div>
+      </div>
+      <div id="send_button">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      </div>
     </div>
     <!-- transfer page -->
     <div id="transfer_page">
-        <span class="subtext subtext_margin">transfer<span id="transfer_error"> - error</span></span>
-        <div class="form_wrap">
-            <label>to:</label>
-            <input type="text" id="transfer_to" placeholder="e.g. kodaxx">
-        </div>
-        <div class="form_wrap">
-            <label>amount:</label>
-            <input type="number" id="transfer_amount" placeholder="e.g. 20.00">
-        </div>
-        <div class="form_wrap">
-            <label>memo:</label>
-            <input type="text" id="transfer_memo" placeholder="public memo (optional)">
-        </div>
-        <div class="primary_button" id="transfer_send">send</div>
+      <span class="subtext subtext_margin">
+        <i class="fa fa-shopping-cart"></i>&nbsp;transfer<span v-show="showErr" id="transfer_error"> - {{ errorMsg }}</span>
+      </span>
+      <div class="form_wrap">
+        <label>to:</label>
+        <input v-model="to" type="text" placeholder="e.g. kodaxx">
+      </div>
+      <div class="form_wrap">
+        <label>amount:</label>
+        <input v-model="amount" type="number" placeholder="e.g. 20.00">
+      </div>
+      <div class="form_wrap">
+        <label>memo:</label>
+        <input v-model="memo" type="text" placeholder="public memo (optional)">
+      </div>
+      <div class="primary_button" @keydown.enter="transfer(this.currency)" @click="transfer(this.currency)">{{ `send ${this.currency.toLowerCase()}` }}</div>
     </div>
     <!-- transfer history -->
     <div id="history_page">
-        <span class="subtext" id="activity">history</span>
-        <p class="subtext" id="none">no recent activity :(</p> 
-        <div id="list">
-            <!-- template for history -->
-            <div id="tx_template" class="tx_wrap" style="display: none">
-                <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from</span><span class="tx_amount received">$</span></span>
-            </div>
+      <span class="subtext" id="activity">
+        <i class="fa fa-history"></i>&nbsp;history<span @click="toggleHistory()" style="float: right;">{{ showStatus }}</span>
+      </span>
+      <p v-show="history.length === 0" class="subtext" id="none">no recent activity :(</p>
+      <div id="list">
+        <!-- template for history -->
+        <div v-for="item in history">
+          <div v-show="item.amount.includes(currency) || showAll" v-if="item.to === user" class="tx_wrap">
+            <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from {{ item.from }}</span>
+            <span class="tx_amount received">{{ item.amount.includes('SBD') ? `$${item.amount}` : `${item.amount}` }}</span>
+            </span>
+          </div>
+          <div v-show="item.amount.includes(currency) || showAll" v-else class="tx_wrap">
+            <span class="tx_icon sent"><i class="fa fa-minus-circle" aria-hidden="true"></i><span class="tx_users">sent to {{ item.to }}</span>
+            <span class="tx_amount sent">{{ item.amount.includes('SBD') ? `$${item.amount}` : `${item.amount}` }}</span>
+            </span>
+          </div>
         </div>
+      </div>
     </div>
-
+  </div>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
