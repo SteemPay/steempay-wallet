@@ -1,6 +1,8 @@
 /*jslint browser: true*/
 /*global SecureLS, $, console, steem, jQuery, document, localStorage, window*/
-let ls = new SecureLS({ encodingType: 'aes' });
+let ls = new SecureLS({
+  encodingType: 'aes'
+});
 
 $(document).ready(function() {
   //navigation
@@ -52,19 +54,32 @@ let vm = new Vue({
     loading: false,
     status: 'loading...',
     errorMsg: 'error',
+    showUSD: false,
     showErr: false,
     showAll: false,
     showStatus: 'show all',
+    showDetails: false,
     user: '',
     avatar: 'img/default-user.png',
     location: '',
     sbd_balance: '0.000',
+    sbd_usd: '0.000',
+    steem_usd: '0.000',
     steem_balance: '0.000',
     history: [],
     currency: 'SBD',
     to: '',
     amount: '',
-    memo: ''
+    memo: '',
+    details: {
+      from: '',
+      to: '',
+      amount: '',
+      memo: '',
+      tx_id: '',
+      tx_href: '',
+      date: ''
+    }
   },
   methods: {
     validateUser: function(user) {
@@ -110,6 +125,19 @@ let vm = new Vue({
       }
     },
 
+    getUSD: function(user) {
+      try {
+        this.$http.get(`${this.api}${user}/value/`).then(function(response) {
+          this.sbd_usd = response.body['steem-dollars'].price_usd.toFixed(2);
+          this.steem_usd = response.body.steem.price_usd.toFixed(2);
+          console.log(response);
+        });
+      } catch (error) {
+        console.log(error);
+        this.status = error;
+      }
+    },
+
     getHistory: function(user) {
       try {
         this.$http.get(`${this.api}${user}/history`).then(function(response) {
@@ -129,13 +157,33 @@ let vm = new Vue({
       }
     },
 
+    swapUSD: function() {
+      this.showUSD = true;
+      setTimeout(function(){
+        vm.$data.showUSD = false;
+      }, 3000);
+    },
+
     toggleHistory: function() {
       this.showAll = !this.showAll;
       this.showAll === true ? this.showStatus = 'show less' : this.showStatus = 'show all';
     },
 
+    historyDetails: function(item) {
+      this.details.from = item.from;
+      this.details.to = item.to;
+      this.details.amount = item.amount;
+      item.memo === '' ? this.details.memo = 'no memo' : this.details.memo = item.memo;
+      this.details.tx_id = item.trx_id;
+      this.details.tx_href = `https://steemd.com/tx/${item.trx_id}`;
+      this.details.date = item.timestamp.replace(/T/g, ' ');
+      this.showDetails = true;
+    },
+
     transfer: async function(currency) {
-      let ls = new SecureLS({ encodingType: 'aes' });
+      let ls = new SecureLS({
+        encodingType: 'aes'
+      });
       let wif = ls.get('key');
       let exists = await this.validateUser(this.to);
       let balance = this.currency === 'SBD' ? this.sbd_balance : this.steem_balance;
@@ -157,8 +205,8 @@ let vm = new Vue({
               vm.$data.loading = false;
               //update balance
               vm.$data.currency === 'SBD' ?
-              vm.$data.sbd_balance = (parseFloat(vm.$data.sbd_balance, 10) - parseFloat(vm.$data.amount, 10)).toFixed(3):
-              vm.$data.steem_balance = (parseFloat(vm.$data.steem_balance, 10) - parseFloat(vm.$data.amount, 10)).toFixed(3);
+                vm.$data.sbd_balance = (parseFloat(vm.$data.sbd_balance, 10) - parseFloat(vm.$data.amount, 10)).toFixed(3) :
+                vm.$data.steem_balance = (parseFloat(vm.$data.steem_balance, 10) - parseFloat(vm.$data.amount, 10)).toFixed(3);
               //add history item
               vm.$data.history.unshift({
                 'from': vm.$data.user,
@@ -192,5 +240,6 @@ let vm = new Vue({
     this.user = localStorage.getItem("user");
     this.getUser(this.user);
     this.getHistory(this.user);
+    this.getUSD(this.user);
   }
 });

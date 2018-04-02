@@ -10,7 +10,7 @@
   <script src="lib/jquery-3.2.1.min.js"></script>
   <script src="lib/steem.min.js"></script>
   <script src="lib/secure-ls.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
   <!-- js -->
   <script src="js/utils.js"></script>
@@ -26,17 +26,20 @@
     <!-- loader div -->
     <div v-show="loading" class="loader"><span id="main_status" class="status">{{ status }}</span></div>
     <!-- nav bar -->
-    <header id="header"><i style="display: none" class="fa fa-chevron-left" id="back" aria-hidden="true"><span id="back_text">back</span></i>
+    <header id="header">
+      <i style="display: none" class="fa fa-chevron-left left-button" id="back" aria-hidden="true"><span id="back_text">back</span></i>
+      <i @click="showDetails = false" v-show="showDetails" class="fa fa-times left-button" aria-hidden="true"></i>
       <span id="header-title">steempay</span>
       <span id="header_balance"> • {{ currency === 'SBD' ? `$${sbd_balance} SBD` : `${steem_balance} STEEM` }}</span>
-      <i class="fa fa-sign-out" id="sign_out" aria-hidden="true"></i>
+      <i v-show="!showDetails" class="fa fa-sign-out" id="sign_out" aria-hidden="true"></i>
       <i class="fa fa-paper-plane" id="header_send" aria-hidden="true"></i>
     </header>
     <!-- account info -->
     <div id="main">
       <div id="hero">
         <i @click="swapCurrency()" style="margin: 5vw; color: white;" class="fa fa-3x fa-caret-left"></i>
-        <span id="balance">{{ currency === 'SBD' ? `$${sbd_balance}` : steem_balance }}<span id="ticker"> {{ currency }}</span></span>
+        <span @click="swapUSD()" v-show="!showUSD" id="balance">{{ currency === 'SBD' ? `$${sbd_balance}` : steem_balance }}<span id="ticker"> {{ currency }}</span></span>
+        <span @click="swapUSD()" v-show="showUSD" id="balance">{{ currency === 'SBD' ? `$${sbd_usd}` : `$${steem_usd}` }}<span id="ticker"> USD</span></span>
         <i @click="swapCurrency()" style="margin: 5vw; color: white;" class="fa fa-3x fa-caret-right"></i>
       </div>
       <img id="profile" :src="avatar">
@@ -71,27 +74,45 @@
       <div class="primary_button" @keydown.enter="transfer(this.currency)" @click="transfer(this.currency)">{{ `send ${this.currency.toLowerCase()}` }}</div>
     </div>
     <!-- transfer history -->
-    <div id="history_page">
+    <div v-show="!showDetails" id="history_page">
       <span class="subtext" id="activity">
         <i class="fa fa-history"></i>&nbsp;history<span @click="toggleHistory()" style="float: right;">{{ showStatus }}</span>
       </span>
       <p v-show="history.length === 0" class="subtext" id="none">no recent activity :(</p>
       <div id="list">
-        <!-- template for history -->
+        <!-- history item -->
         <div v-for="item in history">
-          <div v-show="item.amount.includes(currency) || showAll" v-if="item.to === user" class="tx_wrap">
+          <div @click="historyDetails(item)" v-show="item.amount.includes(currency) || showAll" v-if="item.to === user"
+            class="tx_wrap">
             <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from {{ item.from }}</span>
-            <span class="tx_amount received">{{ item.amount.includes('SBD') ? `$${item.amount}` : `${item.amount}` }}</span>
+            <span class="tx_amount received">{{ item.amount.includes('SBD') ? `+$${item.amount}` : `+${item.amount}` }}</span>
             </span>
           </div>
-          <div v-show="item.amount.includes(currency) || showAll" v-else class="tx_wrap">
+          <div @click="historyDetails(item)" v-show="item.amount.includes(currency) || showAll" v-else class="tx_wrap">
             <span class="tx_icon sent"><i class="fa fa-minus-circle" aria-hidden="true"></i><span class="tx_users">sent to {{ item.to }}</span>
-            <span class="tx_amount sent">{{ item.amount.includes('SBD') ? `$${item.amount}` : `${item.amount}` }}</span>
+            <span class="tx_amount sent">{{ item.amount.includes('SBD') ? `-$${item.amount}` : `-${item.amount}` }}</span>
             </span>
           </div>
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <div v-show="showDetails" id="history_details">
+        <div id="detail-title">
+          <span class="subtext">
+          <i class="fa fa-info-circle"></i>&nbsp;transaction details<span style="float: right; margin-right: 3vw;">{{ details.date }}</span>
+          </span>
+        </div>
+        <div>
+          <p v-show="details.to !== user" class="detail to">to {{ details.to }}</p>
+          <p v-show="details.to === user" class="detail from">from {{ details.from }}</p>
+          <p class="detail amount">{{ details.amount }}</p>
+          <p class="subtext" style="margin-left: 3vw"><i class="fa fa-sticky-note"></i>&nbsp;memo:</p>
+          <textarea class="memo" rows="10" disabled>{{ details.memo }}</textarea>
+          <p class="subtext tx_id_v"><a :href="details.tx_href" target="_blank">view on blockchain: {{ details.tx_id }}</a></p>
+        </div>
+      </div>
+    </transition>
   </div>
   <script src="js/main.js"></script>
 </body>

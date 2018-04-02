@@ -8,7 +8,7 @@
   top: 4vw;
 }
 
-#back {
+.left-button {
   color: #FFFFFF;
   font-size: 5vw;
   position: absolute;
@@ -188,4 +188,63 @@
 
 #transfer_error {
   color: #d26565;
+}
+
+/* DETAILS */
+
+#history_details {
+  background-color: #F6F7F9;
+  z-index: 1000;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+ #detail-title {
+  margin: 16vw 0 3vw 3vw;
+}
+
+.detail {
+  font-size: 7vw;
+  padding: 4vw;
+  margin: 1vw;
+  background-color: #FFFFFF;
+}
+
+.detail.from {
+  color: #65D2BD;
+}
+
+.detail.to {
+  color: #d26565;
+}
+
+.detail.amount {
+  color: grey;
+}
+
+.memo {
+  color: #9EACBA;
+  width: 95%;
+  padding: 3vw;
+  font-size: 4vw;
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.tx_id_v a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tx_id_v {
+  text-align: center;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
