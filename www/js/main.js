@@ -50,7 +50,7 @@ $(window).on("scroll", function() {
 let vm = new Vue({
   el: '#app',
   data: {
-    api: 'https://som.cyphersoft.io/',
+    api: 'https://api.steempay.org',
     loading: false,
     status: 'loading...',
     errorMsg: 'error',
@@ -87,7 +87,7 @@ let vm = new Vue({
         return false;
       }
       return new Promise(resolve => {
-        this.$http.get(`${this.api}${user}`).then(function(response) {
+        this.$http.get(`${this.api}/${user}`).then(function(response) {
           resolve(response.body.unknown_user !== user);
         });
       });
@@ -112,7 +112,7 @@ let vm = new Vue({
       this.loading = true;
       this.status = 'getting user info...'
       try {
-        this.$http.get(`${this.api}${user}`).then(function(response) {
+        this.$http.get(`${this.api}/${user}`).then(function(response) {
           this.avatar = response.body.avatar;
           this.location = response.body.location;
           this.sbd_balance = parseFloat(response.body.balance_sbd);
@@ -127,7 +127,7 @@ let vm = new Vue({
 
     getUSD: function(user) {
       try {
-        this.$http.get(`${this.api}${user}/value/`).then(function(response) {
+        this.$http.get(`${this.api}/${user}/value/`).then(function(response) {
           this.sbd_usd = response.body['steem-dollars'].price_usd.toFixed(2);
           this.steem_usd = response.body.steem.price_usd.toFixed(2);
           console.log(response);
@@ -140,7 +140,7 @@ let vm = new Vue({
 
     getHistory: function(user) {
       try {
-        this.$http.get(`${this.api}${user}/history`).then(function(response) {
+        this.$http.get(`${this.api}/${user}/history`).then(function(response) {
           this.history = response.body;
         });
       } catch (error) {
