@@ -113,8 +113,8 @@ let vm = new Vue({
       this.status = 'getting user info...'
       try {
         this.$http.get(`${this.api}/${user}`).then(function(response) {
-          this.avatar = response.body.avatar;
-          this.location = response.body.location;
+          this.avatar = response.body.avatar !== null ? response.body.avatar : 'img/default-user.png';
+          this.location = response.body.location !== null ? response.body.location : '';
           this.sbd_balance = parseFloat(response.body.balance_sbd);
           this.steem_balance = parseFloat(response.body.balance_steem);
           this.loading = false;
@@ -127,10 +127,11 @@ let vm = new Vue({
 
     getUSD: function(user) {
       try {
-        this.$http.get(`${this.api}/${user}/value/`).then(function(response) {
-          this.sbd_usd = response.body['steem-dollars'].price_usd.toFixed(2);
-          this.steem_usd = response.body.steem.price_usd.toFixed(2);
-          console.log(response);
+        this.$http.get(`${this.api}/rates/steem-dollars`).then(function(response) {
+          this.sbd_usd = (response.body.price_usd * this.sbd_balance).toFixed(2);
+        });
+        this.$http.get(`${this.api}/rates/steem`).then(function(response) {
+          this.steem_usd = (response.body.price_usd * this.steem_balance).toFixed(2);
         });
       } catch (error) {
         console.log(error);
@@ -140,7 +141,7 @@ let vm = new Vue({
 
     getHistory: function(user) {
       try {
-        this.$http.get(`${this.api}/${user}/history`).then(function(response) {
+        this.$http.get(`${this.api}/${user}/history/10000`).then(function(response) {
           this.history = response.body;
         });
       } catch (error) {
@@ -158,10 +159,11 @@ let vm = new Vue({
     },
 
     swapUSD: function() {
-      this.showUSD = true;
-      setTimeout(function(){
-        vm.$data.showUSD = false;
-      }, 3000);
+      //this.showUSD = true;
+      //setTimeout(function(){
+      //  vm.$data.showUSD = false;
+      //}, 3000);
+      this.showUSD = !this.showUSD;
     },
 
     toggleHistory: function() {
@@ -170,12 +172,12 @@ let vm = new Vue({
     },
 
     historyDetails: function(item) {
-      this.details.from = item.from;
-      this.details.to = item.to;
-      this.details.amount = item.amount;
-      item.memo === '' ? this.details.memo = 'no memo' : this.details.memo = item.memo;
-      this.details.tx_id = item.trx_id;
-      this.details.tx_href = `https://steemd.com/tx/${item.trx_id}`;
+      this.details.from = item.details.from;
+      this.details.to = item.details.to;
+      this.details.amount = item.details.amount;
+      item.details.memo === '' ? this.details.memo = 'no memo' : this.details.memo = item.details.memo;
+      this.details.tx_id = item.tx_id;
+      this.details.tx_href = `https://steemd.com/tx/${item.tx_id}`;
       this.details.date = item.timestamp.replace(/T/g, ' ');
       this.showDetails = true;
     },
@@ -240,6 +242,8 @@ let vm = new Vue({
     this.user = localStorage.getItem("user");
     this.getUser(this.user);
     this.getHistory(this.user);
-    this.getUSD(this.user);
+    setTimeout(function(){
+      vm.getUSD(vm.$data.user);
+    }, 3000);
   }
 });

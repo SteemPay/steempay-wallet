@@ -10,7 +10,7 @@
   <script src="lib/jquery-3.2.1.min.js"></script>
   <script src="lib/steem.min.js"></script>
   <script src="lib/secure-ls.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
   <!-- js -->
   <script src="js/utils.js"></script>
@@ -82,15 +82,15 @@
       <div id="list">
         <!-- history item -->
         <div v-for="item in history">
-          <div @click="historyDetails(item)" v-show="item.amount.includes(currency) || showAll" v-if="item.to === user"
+          <div @click="historyDetails(item)" v-show="item.details.amount.includes(currency) || showAll" v-if="item.details.to === user"
             class="tx_wrap">
-            <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from {{ item.from }}</span>
-            <span class="tx_amount received">{{ item.amount.includes('SBD') ? `+$${item.amount}` : `+${item.amount}` }}</span>
+            <span class="tx_icon received"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="tx_users">received from {{ item.details.from }}</span>
+            <span class="tx_amount received">{{ item.details.amount.includes('SBD') ? `+$${item.details.amount}` : `+${item.details.amount}` }}</span>
             </span>
           </div>
-          <div @click="historyDetails(item)" v-show="item.amount.includes(currency) || showAll" v-else class="tx_wrap">
-            <span class="tx_icon sent"><i class="fa fa-minus-circle" aria-hidden="true"></i><span class="tx_users">sent to {{ item.to }}</span>
-            <span class="tx_amount sent">{{ item.amount.includes('SBD') ? `-$${item.amount}` : `-${item.amount}` }}</span>
+          <div @click="historyDetails(item)" v-show="item.details.amount.includes(currency) || showAll" v-else class="tx_wrap">
+            <span class="tx_icon sent"><i class="fa fa-minus-circle" aria-hidden="true"></i><span class="tx_users">sent to {{ item.details.to }}</span>
+            <span class="tx_amount sent">{{ item.details.amount.includes('SBD') ? `-$${item.details.amount}` : `-${item.details.amount}` }}</span>
             </span>
           </div>
         </div>
