@@ -186,6 +186,7 @@ let vm = new Vue({
       let ls = new SecureLS({
         encodingType: 'aes'
       });
+      console.log(ls.get('key'));
       let wif = ls.get('key');
       let exists = await this.validateUser(this.to);
       let balance = this.currency === 'SBD' ? this.sbd_balance : this.steem_balance;
@@ -211,10 +212,14 @@ let vm = new Vue({
                 vm.$data.steem_balance = (parseFloat(vm.$data.steem_balance, 10) - parseFloat(vm.$data.amount, 10)).toFixed(3);
               //add history item
               vm.$data.history.unshift({
-                'from': vm.$data.user,
-                'to': vm.$data.to,
-                'amount': `${parseFloat(vm.$data.amount, 10)} ${vm.$data.currency}`,
-                'memo': vm.$data.memo
+                timestamp: 'just now',
+                tx_id: result.id,
+                details: {
+                  'from': vm.$data.user,
+                  'to': vm.$data.to,
+                  'amount': `${parseFloat(vm.$data.amount, 10)} ${vm.$data.currency}`,
+                  'memo': vm.$data.memo
+                }
               })
               //clear form and go back to home
               vm.$data.to = '';
